@@ -1,5 +1,5 @@
 //  TESTING CODE
-const { fetchMyIP, fetchCoordsByIP } = require('./iss');
+const { fetchMyIP, fetchCoordsByIP, fetchISSFlyOverTimes } = require('./iss');
 
 // fetchMyIP((error, ip) => {
 //   if (error) {
@@ -10,5 +10,8 @@ const { fetchMyIP, fetchCoordsByIP } = require('./iss');
 //   console.log('It worked! Returned IP:' , ip);
 // });
 // fetchMyIP((err, ip) => fetchCoordsByIP(ip, (err, data) => {
-//   console.log(err, data);
+
+//   fetchISSFlyOverTimes(data, (err, locations) => {
+//     console.log(locations);
+//   });
 // }));
