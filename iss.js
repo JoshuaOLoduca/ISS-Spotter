@@ -29,4 +29,34 @@ const fetchMyIP = function(callback) {
   });
 };
 
-module.exports = { fetchMyIP };
+const fetchCoordsByIP = function(ip, callback) {
+  request('http://ip-api.com/json/' + ip, (error, response, body) => {
+
+    if (error) {
+      callback(error, null);
+      return;
+    }
+
+    if (response.statusCode !== 200) {
+      const msg = `Status Code ${response.statusCode} when fetching coordinates for IP. Response: ${body}`;
+      callback(Error(msg), null);
+      return;
+    }
+    const data = JSON.parse(body);
+    
+    const longLat = {
+      latitude: data.lat,
+      longitude: data.lon
+    };
+
+    if (longLat.latitude === undefined) {
+      callback(Error('IP not found'), null);
+      return;
+    }
+
+    callback(null, longLat);
+  });
+
+};
+
+module.exports = { fetchMyIP, fetchCoordsByIP };
